@@ -82,7 +82,6 @@ function extractNameFromTemplate(value) {
  *   'cat'       => 'c'
  */
 function getFirstChar(value) {
-  // throw new Error('Not implemented');
   return value.slice(0, 1);
 }
 
@@ -98,7 +97,6 @@ function getFirstChar(value) {
  *   '\tHello, World! ' => 'Hello, World!'
  */
 function removeLeadingAndTrailingWhitespaces(value) {
-  // throw new Error('Not implemented');
   return value.trim();
 }
 
@@ -114,7 +112,6 @@ function removeLeadingAndTrailingWhitespaces(value) {
  *   'cat', 3 => 'catcatcat'
  */
 function repeatString(value, count) {
-  // throw new Error('Not implemented');
   return value.repeat(count);
 }
 
@@ -181,7 +178,6 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-  // throw new Error('Not implemented');
   return str.split(';');
 }
 
@@ -208,8 +204,11 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const a = `┌${'─'.repeat(width - 2)}┐\n`;
+  const b = `│${' '.repeat(width - 2)}│\n`;
+  const c = `└${'─'.repeat(width - 2)}┘\n`;
+  return a + b.repeat(height - 2) + c;
 }
 
 
@@ -246,8 +245,15 @@ function encodeToRot13(/* str */) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  // throw new Error('Not implemented');
+  // const r = String(value);
+  // const r1 = new String(value);
+
+  if (typeof (value) === 'string' || String(value)) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -275,8 +281,17 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const array = ['A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣',
+    'K♣', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♠',
+    '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠'];
+  const array1 = [...value];
+  for (let i = 0; i < array.length; i += 1) {
+    array1[i] = array[i];
+  }
+
+  return array.indexOf(value);
 }
 
 
