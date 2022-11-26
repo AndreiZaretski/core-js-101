@@ -20,8 +20,8 @@
  *    ['Array', 'Number', 'string'], 'Date'    => -1
  *    [0, 1, 2, 3, 4, 5], 5    => 5
  */
-function findElement(/* arr, value */) {
-  throw new Error('Not implemented');
+function findElement(arr, value) {
+  return arr.indexOf(value);
 }
 
 /**
@@ -385,8 +385,8 @@ function findAllOccurrences(/* arr, item */) {
  *    [1, 2, 3, 4, 5]                   => '1,2,3,4,5'
  *    ['rock', 'paper', 'scissors']     => 'rock,paper,scissors'
  */
-function toStringList(/* arr */) {
-  throw new Error('Not implemented');
+function toStringList(arr) {
+  return arr.join(',');
 }
 
 
@@ -418,6 +418,9 @@ function toStringList(/* arr */) {
  */
 function sortCitiesArray(/* arr */) {
   throw new Error('Not implemented');
+  // const arr1 = arr.sort((a, b) => a.country - b.country);
+  // const arr2 = arr1.sort((a, b) => a.city - b.city);
+  // return arr2;
 }
 
 /**
