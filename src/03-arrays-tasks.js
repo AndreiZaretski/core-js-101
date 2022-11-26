@@ -242,6 +242,7 @@ function toArrayOfSquares(arr) {
 function getMovingSum(/* arr */) {
   throw new Error('Not implemented');
   // return arr.map((el) => el + el);
+  // result = [];
 }
 
 /**
@@ -274,9 +275,9 @@ function getSecondItems(arr) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
-  // return arr.map((el, i) =>);
+function propagateItemsByPositionIndex(arr) {
+  const arr1 = arr.map((el, i) => Array(i + 1).fill(el));
+  return arr1.flat();
 }
 
 
@@ -315,6 +316,7 @@ function getPositivesCount(/* arr */) {
   throw new Error('Not implemented');
   // if (arr.length === 0) return 0;
   // return arr.reduce((el) => el > 0, 0);
+  // return arr.filter((el) => Number(el) > 0).length;
 }
 
 /**
@@ -381,8 +383,8 @@ function getFalsyValuesCount(arr) {
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-function findAllOccurrences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurrences(arr, item) {
+  return arr.filter((el) => el === item).length;
 }
 
 /**
@@ -486,8 +488,8 @@ function getIntervalArray(start, end) {
  *   [ 'a', 'a', 'a', 'a' ]  => [ 'a' ]
  *   [ 1, 1, 2, 2, 3, 3, 4, 4] => [ 1, 2, 3, 4]
  */
-function distinct(/* arr */) {
-  throw new Error('Not implemented');
+function distinct(arr) {
+  return arr.filter((el, i) => arr.indexOf(el) === i);
 }
 
 /**
