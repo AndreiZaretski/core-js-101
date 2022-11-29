@@ -241,8 +241,9 @@ function toArrayOfSquares(arr) {
  */
 function getMovingSum(/* arr */) {
   throw new Error('Not implemented');
-  // return arr.map((el) => el + el);
-  // result = [];
+  // const arr1 = [];
+  // arr.map((el, i) => arr1.push(arr[0] + arr[i]), arr);
+  // return console.log(arr1);
 }
 
 /**
@@ -429,11 +430,15 @@ function toStringList(arr) {
  *      { country: 'Russia',  city: 'Saint Petersburg' }
  *    ]
  */
-function sortCitiesArray(/* arr */) {
-  throw new Error('Not implemented');
-  // const arr1 = arr.sort((a, b) => a.country - b.country);
-  // const arr2 = arr1.sort((a, b) => a.city - b.city);
-  // return arr2;
+function sortCitiesArray(arr) {
+  const newArr = arr.sort((a, b) => (a.country > b.country ? 1 : -1));
+  return newArr.sort((a, b) => {
+    if (a.country === b.country) {
+      if (a.city > b.city) return 1;
+      if (a.city < b.city) return -1;
+    }
+    return 0;
+  });
 }
 
 /**
@@ -454,8 +459,11 @@ function sortCitiesArray(/* arr */) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  // throw new Error('Not implemented');
+  const arr = Array(n).fill(Array(n).fill(0));
+  const arr1 = arr.map((el, i) => el.map((_, j) => (i === j ? 1 : 0)));
+  return arr1;
 }
 
 /**
@@ -540,8 +548,9 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  // throw new Error('Not implemented');
+  return arr.map((childrenSelector)).flat();
 }
 
 
