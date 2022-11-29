@@ -78,15 +78,15 @@ function isLeapYear(date) {
  */
 function timeSpanToString(startDate, endDate) {
   const res = endDate - startDate;
-  const milliseconds = ((res % 1000)).toString().padStart(3, '0');
-  const seconds = ((res / 1000) % 60).toFixed(0).toString().padStart(2, '0');
-  const minutes = ((res / (1000 * 60)) % 60).toFixed(0).toString().padStart(2, '0');
-  const hours = Math.floor(((res / (1000 * 60 * 60)) % 24)).toString().padStart(2, '0');
-  // res = new Date();
-  // const milliseconds = res.getMilliseconds();
-  // const seconds = res.getSeconds();
-  // const minutes = res.getMinutes();
-  // const hours = res.getHours();
+  // const milliseconds = ((res % 1000)).toString().padStart(3, '0');
+  // const seconds = ((res / 1000) % 60).toFixed(0).toString().padStart(2, '0');
+  // const minutes = ((res / (1000 * 60)) % 60).toFixed(0).toString().padStart(2, '0');
+  // const hours = Math.floor(((res / (1000 * 60 * 60)) % 24)).toString().padStart(2, '0');
+  const res1 = new Date((-3600000 * 3) + res);
+  const milliseconds = res1.getMilliseconds().toString().padStart(3, '0');
+  const seconds = res1.getSeconds().toString().padStart(2, '0');
+  const minutes = res1.getMinutes().toString().padStart(2, '0');
+  const hours = res1.getHours().toString().padStart(2, '0');
 
   return `${hours}:${minutes}:${seconds}.${milliseconds}`;
 }

@@ -239,11 +239,19 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  // throw new Error('Not implemented');
   // const arr1 = [];
   // arr.map((el, i) => arr1.push(arr[0] + arr[i]), arr);
   // return console.log(arr1);
+  return arr.reduce((acc1, item, index, acc) => ((arr[index - 1])
+    ? acc.push(arr[index] + arr[index - 1])
+    : acc.push(arr[index])),
+  // console.log(acc),
+  // return acc;
+  // return acc;
+  []);
+  // return acc;
 }
 
 /**
@@ -460,7 +468,6 @@ function sortCitiesArray(arr) {
  *           [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  // throw new Error('Not implemented');
   const arr = Array(n).fill(Array(n).fill(0));
   const arr1 = arr.map((el, i) => el.map((_, j) => (i === j ? 1 : 0)));
   return arr1;
