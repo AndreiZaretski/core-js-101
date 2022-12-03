@@ -244,14 +244,18 @@ function getMovingSum(arr) {
   // const arr1 = [];
   // arr.map((el, i) => arr1.push(arr[0] + arr[i]), arr);
   // return console.log(arr1);
-  return arr.reduce((acc1, item, index, acc) => ((arr[index - 1])
-    ? acc.push(arr[index] + arr[index - 1])
-    : acc.push(arr[index])),
+  // return arr.reduce((acc1, item, index, acc) => ((arr[index - 1])
+  //   ? acc.push(arr[index] + arr[index - 1])
+  //   : acc.push(arr[index])),
   // console.log(acc),
   // return acc;
   // return acc;
-  []);
+  // []);
   // return acc;
+  // const sum = 0;
+  return arr.map((el, index) => ((index === 0) ? el : arr.slice(0, index + 1)
+    .reduce((sum, curr) => sum + curr)
+  ));
 }
 
 /**
@@ -321,11 +325,12 @@ function get3TopItems(arr) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  // throw new Error('Not implemented');
   // if (arr.length === 0) return 0;
   // return arr.reduce((el) => el > 0, 0);
-  // return arr.filter((el) => Number(el) > 0).length;
+  const newArr = arr.filter((el) => el > 0 && typeof el === 'number');
+  return newArr.length;
 }
 
 /**
@@ -341,8 +346,11 @@ function getPositivesCount(/* arr */) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  // throw new Error('Not implemented');
+  const arrEt = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+
+  return arr.sort((a, b) => arrEt.indexOf(a) - arrEt.indexOf(b));
 }
 
 /**

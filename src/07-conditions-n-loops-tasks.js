@@ -128,13 +128,20 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
   // && (rect1.left + rect1.width) > (rect2.left + rect2.width)
   // && (rect1.top > rect2.top) && (rect1.left > rect2.left)) return true;
   // return false;
-  // if ((((rect2.top + rect2.height) - (rect1.top + rect1.height)) >= 0)
-  // && (((rect2.width + rect2.left) - (rect1.width + rect1.left) >= 0))) return true;
-  // if ((((rect2.top + rect2.height) - (rect1.top + rect1.height)) <= 0)
-  // && (((rect2.width + rect2.left) - (rect1.width + rect1.left <= 0)))) return true;
+  // if ((((rect2.height + rect2.top) - (rect1.height + rect1.top)) >= 0)
+  // && (((rect2.left + rect2.width) - (rect1.left + rect1.width) >= 0))) return true;
+  // if ((((rect2.height + rect2.top) - (rect1.height + rect1.top)) >= 0)
+  // && (((rect2.left + rect2.width) - (rect1.left + rect1.width >= 0)))) return true;
+  // return false;
+  // if ((rect1.top + rect1.height) >= (rect2.top + rect2.height)
+  // && (rect1.left + rect1.width) >= (rect2.left + rect2.width)) return true;
+  // // if ((rect1.top + rect1.height) <= (rect2.top + rect2.height)
+  // // && (rect1.left + rect1.width) <= (rect2.left + rect2.width)) return true;
+  // if (((rect1.top > rect2.top)
+  // && (rect1.left > rect2.left)) && (((rect1.top < (rect2.top + rect2.height))
+  // && (rect1.left < (rect2.left + rect2.width))))) return true;
   // return false;
 }
-
 
 /**
  * Returns true, if point lies inside the circle, otherwise false.
@@ -164,9 +171,11 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  */
 function isInsideCircle(circle, point) {
   // throw new Error('Not implemented');
-  if ((circle.center.x + circle.radius - point.x > 0)
-  && (circle.center.y + circle.radius - point.y > 0)) return true;
-  return false;
+//   if ((Math.abs(point.x) < (circle.center.x + circle.radius))
+//  && ((Math.abs(point.y) < (circle.center.y + circle.radius)))) return true;
+//   return false;
+  return (((circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2)
+   < circle.radius ** 2);
 }
 
 
@@ -211,8 +220,19 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  // throw new Error('Not implemented');
+  let open;
+  let close;
+  let max;
+  let min;
+  if (isStartIncluded === true) open = '[';
+  if (isStartIncluded === false) open = '(';
+  if (isEndIncluded === true) close = ']';
+  if (isEndIncluded === false) close = ')';
+  if (a > b) { max = a; min = b; }
+  if (a < b) { max = b; min = a; }
+  return `${open}${min}, ${max}${close}`;
 }
 
 
@@ -319,8 +339,39 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  // throw new Error('Not implemented');
+  const OPEN_BRACKETS = ['(', '{', '[', '<'];
+  const BRACKETS_PAIR = {
+    ')': ')',
+    '}': '}',
+    ']': ']',
+    '>': '>',
+  };
+
+  const stack = [];
+  if (str === '') return true;
+
+  for (let i = 0; i < str.length; i += 1) {
+    const currentSymbol = str[i];
+
+    if (OPEN_BRACKETS.includes(currentSymbol)) {
+      stack.push(currentSymbol);
+    } else {
+      if (stack.length === 0) {
+        return false;
+      }
+
+      const topElement = stack[stack.length - 1];
+
+      if (BRACKETS_PAIR[currentSymbol] === topElement) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
 }
 
 
@@ -344,8 +395,9 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  // throw new Error('Not implemented');
+  return num.toString(n);
 }
 
 
@@ -361,8 +413,38 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  // throw new Error('Not implemented');
+  const res = [];
+  let arr3;
+  for (let i = 0; i < pathes.length; i += 1) {
+    const arr1 = pathes[i].split('');
+    // console.log(arr1);
+    for (let j = 0; j < arr1.length; j += 1) {
+      if (pathes[i][j] === pathes[i + 1][j]) res.push(pathes[i][j]);
+      if (pathes[i][j] !== pathes[i + 1][j]) {
+        const res0 = res.join('');
+        // console.log(res.join(''));
+        // res.join('');
+        const arr2 = res0.split('');
+        // console.log(arr1);
+        // .slice(0, lastIndexOf('/')).join('');
+        arr3 = arr2.slice(0, [arr2.lastIndexOf('/') + 1]).join('');
+        return arr3;
+      }
+    // console.log(res);
+    // res = arr1.filter((el, j) => {
+    //   pathes[i][j] === pathes[i + 1][j];
+    //   if (pathes[i][j] !== pathes[i + 1][j]) return res;
+    // });
+    }
+    // const arr1 = res.split('');
+    // console.log(arr1);
+    // // .slice(0, lastIndexOf('/')).join('');
+    // const arr2 = arr1.slice(0, [arr1.lastIndexOf('/')]);
+    // console.log(arr2);
+  }
+  return arr3;
 }
 
 
