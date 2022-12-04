@@ -27,10 +27,8 @@ function getComposition(f, g) {
   // throw new Error('Not implemented');
 
   // return f(g);
-  const fn1 = function (x) {
-    return f(g(x));
-  };
-  return fn1;
+  return (x) => f(g(x));
+  // return fn1;
 }
 
 
@@ -52,10 +50,8 @@ function getComposition(f, g) {
  */
 function getPowerFunction(exponent) {
   // throw new Error('Not implemented');
-  const fn = function (x) {
-    return x ** exponent;
-  };
-  return fn;
+  return (x) => x ** exponent;
+  // return fn;
 }
 
 
@@ -164,9 +160,7 @@ function partialUsingArguments(fn, ...args1) {
   // return
   // fn();
   // (...args1) => args1.reduce((a, b) => a + b);
-  return function (...args2) {
-    return fn(...args1, ...args2);
-  };
+  return (...args2) => fn(...args1, ...args2);
 }
 
 
