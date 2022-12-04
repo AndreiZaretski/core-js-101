@@ -23,10 +23,14 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  // throw new Error('Not implemented');
 
   // return f(g);
+  const fn1 = function (x) {
+    return f(g(x));
+  };
+  return fn1;
 }
 
 
@@ -46,8 +50,12 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  // throw new Error('Not implemented');
+  const fn = function (x) {
+    return x ** exponent;
+  };
+  return fn;
 }
 
 
@@ -149,8 +157,16 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  // throw new Error('Not implemented');
+
+  // const arrArg = args1.split('');
+  // return
+  // fn();
+  // (...args1) => args1.reduce((a, b) => a + b);
+  return function (...args2) {
+    return fn(...args1, ...args2);
+  };
 }
 
 
@@ -173,7 +189,17 @@ function partialUsingArguments(/* fn, ...args1 */) {
  */
 function getIdGeneratorFunction(/* startFrom */) {
   throw new Error('Not implemented');
+  // startFrom = startFrom;
+  // getIdGenerator(startFrom);
+  // startFrom -= 1;
+  // return () => {
+  //   startFrom = +1;
+  // };
 }
+
+// function getIdGenerator(startFrom) {
+//   startFrom += 1;
+// }
 
 
 module.exports = {
