@@ -122,8 +122,8 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  // throw new Error('Not implemented');
   // if ((rect1.top + rect1.height) > (rect2.top + rect2.height)
   // && (rect1.left + rect1.width) > (rect2.left + rect2.width)
   // && (rect1.top > rect2.top) && (rect1.left > rect2.left)) return true;
@@ -141,6 +141,12 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
   // && (rect1.left > rect2.left)) && (((rect1.top < (rect2.top + rect2.height))
   // && (rect1.left < (rect2.left + rect2.width))))) return true;
   // return false;
+  if ((rect1.top > rect2.top + rect2.height)
+  || (rect2.top > rect1.top + rect1.height)
+  || (rect1.left > rect2.left + rect2.width)
+   || (rect2.left > rect1.left + rect1.width)) return false;
+
+  return true;
 }
 
 /**
@@ -174,8 +180,8 @@ function isInsideCircle(circle, point) {
 //   if ((Math.abs(point.x) < (circle.center.x + circle.radius))
 //  && ((Math.abs(point.y) < (circle.center.y + circle.radius)))) return true;
 //   return false;
-  return (((circle.center.x - point.x) ** 2 + (circle.center.y - point.y) ** 2)
-   < circle.radius ** 2);
+  return (((circle.center.x - point.x)
+  ** 2 + (circle.center.y - point.y) ** 2) < circle.radius ** 2);
 }
 
 
@@ -348,6 +354,7 @@ function isBracketsBalanced(str) {
     ']': ']',
     '>': '>',
   };
+  // const Brackets = ['()', '{}', '[]', '<>'];
 
   const stack = [];
   if (str === '') return true;
@@ -370,8 +377,11 @@ function isBracketsBalanced(str) {
         return false;
       }
     }
+    // if (stack[stack.length - 1] === BRACKETS_PAIR[str[i]]) stack.pop();
+    // else stack.push(str[i]);
+    // if (str.includes(BRACKETS_PAIR[i])) str.replace(BRACKETS_PAIR[i], '');
   }
-  return stack.length === 0;
+  return str.length === 0;
 }
 
 
