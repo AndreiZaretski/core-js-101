@@ -298,8 +298,39 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  // throw new Error('Not implemented');
+  // let ch = 0;
+  // const num = String(ccn);
+  // const isOdd = num.length % 2 !== 0;
+
+  // if (num === '') return false;
+
+  // for (let i = 0; i < num.length; i += 1) {
+  //   // const n = parseInt(num[i], 10);
+  //   const n = Number(num[i]);
+  //   const n2 = n * 2;
+
+  //   ch += (isOdd || 0) === (i % 2) && n2 > 9 ? (n - 9) : n;
+  // }
+  // .map((el, i) => (el[i] > 9 ? el[i].toString().split('').map(Number)
+  // .reduce((acc, cur) => acc + cur, 0) : el[i])).reduce((acc, curr) => acc + curr, 0) % 10;
+
+  // return (ch % 10) === 0;
+  // let numArr = ccn.toString().split('').map(Number);
+  // if (!(numArr.length % 2)) {
+  //   numArr = numArr.map((el, i) => (!(i % 2) ? el * 2 : el));
+  // } else {
+  //   numArr = numArr.map((el, i) => ((i % 2) ? el * 2 : el));
+  // }
+  // numArr = numArr.map((el) => (el > 9 ? el - 9 : el));
+  // return !(numArr.reduce((acc, cur) => acc + cur) % 10);
+
+  const numArr = ccn.toString().split('').map(Number).reverse();
+  return !(numArr.map((el, i) => (i % 2 !== 0 ? el * 2 : el))
+    .map((el) => (el > 9 ? el.toString().split('').map(Number)
+      .reduce((acc, cur) => acc + cur, 0) : el))
+    .reduce((acc, cur) => acc + cur) % 10);
 }
 
 /**
@@ -348,12 +379,13 @@ function getDigitalRoot(num) {
 function isBracketsBalanced(str) {
   // throw new Error('Not implemented');
   const OPEN_BRACKETS = ['(', '{', '[', '<'];
-  const BRACKETS_PAIR = {
-    ')': ')',
-    '}': '}',
-    ']': ']',
-    '>': '>',
-  };
+  const BRACKETS_PAIR = [')', '}', ']', '>'];
+  // {
+  //   ')': ')',
+  //   '}': '}',
+  //   ']': ']',
+  //   '>': '>',
+  // };
   // const Brackets = ['()', '{}', '[]', '<>'];
 
   const stack = [];
@@ -361,27 +393,30 @@ function isBracketsBalanced(str) {
 
   for (let i = 0; i < str.length; i += 1) {
     const currentSymbol = str[i];
+    const topElement = stack[stack.length - 1];
 
-    if (OPEN_BRACKETS.includes(currentSymbol)) {
+    if (stack.length === 0) {
       stack.push(currentSymbol);
+    } else if (topElement === OPEN_BRACKETS[BRACKETS_PAIR.indexOf(currentSymbol)]
+    && BRACKETS_PAIR.includes(currentSymbol)) {
+      stack.pop();
     } else {
-      if (stack.length === 0) {
-        return false;
-      }
-
-      const topElement = stack[stack.length - 1];
-
-      if (BRACKETS_PAIR[currentSymbol] === topElement) {
-        stack.pop();
-      } else {
-        return false;
-      }
+      stack.push(currentSymbol);
     }
+    // {
+    //   if (OPEN_BRACKETS.includes(currentSymbol)) {
+    //     stack.push(currentSymbol);
+    //   } else if (BRACKETS_PAIR[currentSymbol] === topElement) {
+    //     stack.pop();
+    //   } else {
+    //     stack.push(currentSymbol);
+    //   }
+    // }
     // if (stack[stack.length - 1] === BRACKETS_PAIR[str[i]]) stack.pop();
     // else stack.push(str[i]);
     // if (str.includes(BRACKETS_PAIR[i])) str.replace(BRACKETS_PAIR[i], '');
   }
-  return str.length === 0;
+  return stack.length === 0;
 }
 
 
