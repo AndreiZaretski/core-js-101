@@ -489,7 +489,7 @@ function getCommonDirectoryPath(pathes) {
     // const arr2 = arr1.slice(0, [arr1.lastIndexOf('/')]);
     // console.log(arr2);
   }
-  return arr3;
+  return res;
 }
 
 
@@ -514,15 +514,14 @@ function getCommonDirectoryPath(pathes) {
 function getMatrixProduct(m1, m2) {
   // throw new Error('Not implemented');
   const res = [];
-  let sum;
+
   for (let i = 0; i < m1.length; i += 1) {
-    res[i] = [0];
+    res[i] = [];
     for (let j = 0; j < m2[0].length; j += 1) {
-      sum = 0;
+      res[i][j] = 0;
       for (let h = 0; h < m1[0].length; h += 1) {
-        sum += m1[i][h] * m2[h][j];
+        res[i][j] += m1[i][h] * m2[h][j];
       }
-      res[i][j] = sum;
     }
   }
   return res;

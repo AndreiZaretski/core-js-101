@@ -545,18 +545,18 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
-  // const map = new Map();
-  // array.reduce((acc, curr) => {
-  //   if (acc.has(keySelector(curr))) {
-  //     acc.get(keySelector(curr)).push(valueSelector(curr));
-  //   } else {
-  //     acc.set(keySelector(curr), [valueSelector(curr)]);
-  //   } return acc;
-  // }, map);
+function group(array, keySelector, valueSelector) {
+  // throw new Error('Not implemented');
+  const map = new Map();
+  array.reduce((acc, curr) => {
+    if (acc.has(keySelector(curr))) {
+      acc.get(keySelector(curr)).push(valueSelector(curr));
+    } else {
+      acc.set(keySelector(curr), [valueSelector(curr)]);
+    } return acc;
+  }, map);
 
-  // return map;
+  return map;
 }
 
 
